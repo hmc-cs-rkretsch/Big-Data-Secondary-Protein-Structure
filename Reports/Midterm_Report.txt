@@ -4,3 +4,15 @@ Midterm Report
 Final Project
 Accuracy of algorithms for predicting secondary protein structure
 
+Many of the methods first change the amino acid sequence. Essentially, they are trying to model post-transcriptional modifications. Given enough time I may try and introduce a modification method, but this is not as interesting for big data purposes. So I will assume that no modification has occured, and try to identify the secondary structure despite the fact the fact that I am ignoring modficiations.
+
+Most methods are publicly availble. For my project, I want to take the principles these methods used and implement them myself. I will then compare the accuracy and efficieny of the methods. Implementing them myself will first be a great learing expierence, and second allow me to compare them more fairly as the implementation will be more uniform.
+
+I have broken this project into steps:
+1) Collect data, amino acid sequences (also need to find a good group of proteins to test)
+2) Study the methods used and understand the math behind it (essentially this will give me psuedocode)
+3) Implement the methods
+4) Test the implementation
+The goals is to have the first two done by the midterm and the second two to do after. There is a chance that I will not be able to implement and test all methods which is likely, but I would like to have a least 2 working. I would still like to have the mathematical understanding behind all of them though.
+
+I have collected sequence data from the protein data bank. 
