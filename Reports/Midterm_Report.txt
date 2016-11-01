@@ -2,60 +2,85 @@ Rachael Kretsch
 Big Data
 Midterm Report
 Final Project
+
+
 Accuracy of algorithms for predicting secondary protein structure
 
-NEED TO SPELL CHECKKKKK!!!!!!
 
 Note:
-Extension was to end of October by Prof Gu. I switched project because analysising the yelp data was just not interesting me. I have made enough progress on this project that I believe I will be able to complete my goals by the deadlines.
+Extension was to end of October by Prof Gu. I switched project because analysing the yelp data was just not interesting me. I changed to a project I am more motivated to work very hard on! I have made enough progress on this project that I believe I will be able to complete my goals by the deadlines.
+
 
 Overview of the project:
-This project aims to look at methods to predict secondary protein structure. Protein structure prediction is a major field of study and is a problem that takes massive computational power to solve. There are two main approaches looking from a biochemical point of view. The first is isolated the protein, crystallzing it, and performing crystal chromatography to figure out the structure. This structure is relaxed into it's hypothesized structure via molecular dynamics. I have previously done work on molecular dynamic methods, but now I would like to look at it from the other direction. One of the most plentiful and easy to obtain biological data is DNA sequence. From the DNA sequence of a coding region there are simply rules to propose a great starting point for the proteins amino acid sequence. The problem of predicting the 3D structure from an amino acid sequence is extremely hard. I will reduce this problem to simpler features. My aim is to look at how we can use the amino acid sequence, the primary structure, to deduce secondary structure components like beta sheets, alpha helices, and coils. 
+This project aims to look at methods to predict secondary protein structure. Protein structure prediction is a major field of study and is a problem that takes massive computational power to solve. There are two main approaches looking from a biochemical point of view. The first is isolated the protein, crystallizing it, and performing crystal chromatography to figure out the structure. This structure is relaxed into its hypothesized structure via molecular dynamics. I have previously done work on molecular dynamic methods, but now I would like to look at it from the other direction. One of the most plentiful and easy to obtain biological data is DNA sequence. From the DNA sequence of a coding region there are simply rules to propose a great starting point for the protein's amino acid sequence. The problem of predicting the 3D structure from an amino acid sequence is extremely hard. I will reduce this problem to simpler features. My aim is to look at how we can use the amino acid sequence, the primary structure, to deduce secondary structure components like beta sheets, alpha helices, and coils. 
 
-Many of the methods first change the amino acid sequence. Essentially, they are trying to model post-transcriptional modifications. Given enough time I may try and introduce a modification method, but this is not as interesting for big data purposes. So I will assume that no modification has occured, and try to identify the secondary structure despite the fact that I am ignoring modficiations.
 
-Most methods are publicly availble. For my project, I want to take the principles these methods used and implement them myself. I will then compare the accuracy and efficieny of the methods. Implementing them myself will first be a great learing expierence, and second allow me to compare them more fairly as the implementation will be more uniform.
+Many of the methods first change the amino acid sequence. Essentially, they are trying to model post-transcriptional modifications. Given enough time I may try and introduce a modification method, but this is not as interesting for big data purposes. So I will assume that no modification has occurred, and try to identify the secondary structure despite the fact that I am ignoring modifications.
 
-I have broken this project into steps:
-1) Collect data, amino acid sequences (also need to find a good group of proteins to test)
-2) Study the methods used and understand the math behind it (essentially this will give me psuedocode)
-3) Implement the methods
-4) Test the implementation
+
+Most methods are publicly available. For my project, I want to take the principles these methods used and implement them myself. I will then compare the accuracy and efficiency of the methods. Implementing them myself will first be a great learning experience, and second allow me to compare them more fairly as the implementation will be more uniform.
+
+
+I have broken this project into these steps:
+Collect data, amino acid sequences (also need to find a good group of proteins to test)
+Study the methods used and understand the math behind it (essentially this will give me pseudocode)
+Implement the methods
+Test the implementation
 The goals is to have the first two done by the midterm and the second two to do after. There is a chance that I will not be able to implement and test all methods which is likely, but I would like to have a least 2 working. I would still like to have the mathematical understanding behind all of them though!
 
+
 Methods:
-The methods listed have all been developed to predict secondary structure from the primary structure, amino acid sequence. They have not used the same data sets as training or test sets.
+The methods listed have all been developed to predict secondary structure from the primary structure, amino acid sequence. They have not used the same data sets as training or test sets. They span the time period of this research from the 90s to present day. Unfortunately, I do not have enough space to write out the equations and pseudo code, but will give an overview of the methods here. Check out the papers if you are interested. Some are very cool but may be too difficult to implement.
+
 
 GOR
-This is one of the earliest methods devleoped in the 90s. It was derived from the work by Robson et al. on using informaiton theory and Baysian statistic to soleve this issue. 
+This is one of the earliest methods developed in the 90s. It was derived from the work by Robson et al. on using information theory and Bayesian statistic to solve this issue. It extends information theory to an equation of the probability that a chain of the amino acids make a certain secondary structure.
+
+Where S is the secondary structure, R is the amino acid and n-S is a secondary structure that is not S. Various GOR versions have progressively made more approximations to increase the speed of these calculations.
+
+
+SOPM
+First is builds sub-datasets of the training set by making binary comparisons. Then its uses a supervised learning algorithm to match sequence similarities and secondary structures. Then iteratively determine parameters. The main issue with this algorithm is that the initial similarity check examine each amino acids ~17 times. It may not be efficient for large training sets.
+
 
 YASSPP
+YASSPP is more recent that the above two methods, 2006, and therefore takes advantage of more recent big data theory. It uses a “pair of cascaded models constructed from two sets of binary SVM-based models”. The first model provides each amino acid a weight for each of the secondary structures, taking them as independent. These weights are then inputs for the second model which predicts the secondary structure of the protein. The kernel functions they developed are complex and I struggle to understand how they came to them. However, by using a kernel this significantly speeds up the problem, and I think this method is promising for implementation.
+
 
 HCAM
-HCAM (Hydropathy Clustering Assisted Method) is a relatively new method
+HCAM (Hydropathy Clustering Assisted Method) is a relatively new method. First they got motifs by a multiple alignment analysis. They used the Gonnet substitution matrix, which is essentially a matrix indicated how similar amino acid sequences are, should there be a large penalty for saying they are equal or not. These motifs were then clustered by secondary structure. This is not one of my top methods to implement because it focuses on the specific problem of water soluble globular proteins. It focuses on hydrophobicity by clustering them again by polar and nonpolar residues. This is an important property for this subset but the generally as important.
+
 
 s2D
-s2D is one of the newest and most promising prediction methods (along with SPIDER2, a deep nueral network algorithm).
+s2D is one of the newest and most promising prediction methods (along with SPIDER2, a deep neural network algorithm). It uses single-hidden layer feedforward neural networks (SLFNs) trained with ELMs. ELMs, extreme learning machine, is a concept I struggle to grasp, so I may attempt to simplify this problem if I choose to implement it. It is a three-step iterative process that uses neural networks at each step. This is the most complex method I choose to analyse and still needs some learning and studying before implementation.
+
 
 Data Collection:
-I have collected sequence data from the protein data bank. These data sets contain non homolgous (similar) proteins, their code, and their structures predicted by x-ray crystallography or nmr. This makes supervised learning methods possible.
--BT426 http://www.imtech.res.in/raghava/bteval/dataset.html
--PLP399, PLP364, and PLP273 http://www.cbs.dtu.dk/services/NetTurnP/suppl/plp.php
--s2D http://www.sciencedirect.com/science/article/pii/S002228361400641X, the main data set I will use, most recent, and largest. It is free monomers in solution and all correspond to similar expiremental conditions within a reasonable margin.
+I have collected sequence data from the protein data bank. These data sets contain non homologous (similar) proteins, their code, and their structures predicted by x-ray crystallography or nmr. This makes supervised learning methods possible.
+BT426 http://www.imtech.res.in/raghava/bteval/dataset.html
+PLP399, PLP364, and PLP273 http://www.cbs.dtu.dk/services/NetTurnP/suppl/plp.php
+s2D http://www.sciencedirect.com/science/article/pii/S002228361400641X, the main data set I will use, most recent, and largest. It is free monomers in solution and all correspond to similar experimental conditions within a reasonable margin.
+
 
 Future work:
--Implement the procedures in python!
--Test the accuracy of the procedures using the s2D dataset.
+Implement the procedures in python!
+Test the accuracy of the procedures using the s2D dataset.
+Write report! A lot of the introductory material I have, but need to include implementation.
+Make presentation, focus on the methods, a little introduction, and a little about my results as well.
+
 
 Comments and issues that may arise:
--I have ignored post-transcriptional modification, however in theory all methods would suffer roughly evenly, so it should still be a fair test.
--I have ignored the fact that when folding chaperone protein complexes may catalyze the folding, not just spontaneous.
--s2D is a massive dataset!
--Some method may be slow on a desktop compute, use up some of my xsede allocations possibly?
+I have ignored post-transcriptional modification, however in theory all methods would suffer roughly evenly, so it should still be a fair test.
+I have ignored the fact that when folding chaperone protein complexes may catalyze the folding, not just spontaneous.
+s2D is a massive dataset!
+Some method may be slow on a desktop computer, use up some of my xsede allocations possibly?
+
 
 References:
 Cambria, A. Hidropathy Clustering Assisted Methods. 2009. http://www.acbrc.org/hcam.html
 Garnier, J., Gibrat, J.F., Robson, B. GOR Method for Predicting Protein Secondary Structure from Amino Acid Sequence. Method in Enzymology. 1996. 266:540-53.
+Geourjon C, Deleage G. SOPM: a self-optimimization mehtod for protein secondary structure prediction. Protein Engineering. 1994. 7(2):157-64.
 Karypis, G. YASSPP: Better Kernels and Coding Schemes Lead to Improvements in Protein Secondary Structure Prediction. Proteins. 2006. 64:575-86.
 Singh, M. Predicting Protein Secondary and Supersecondary Structure. Princeton University. CRC Press. 2001.
 Sormanni, P., Camilloni, C., Fariselli, P., Vendruscolo, M. The s2D Method: Simultaneous Sequence-Based Prediction of the Statistical Populations of Ordered and Disordered Regions in Proteins. J. Mol. Biol. 2015. 427: 982-96.
+
