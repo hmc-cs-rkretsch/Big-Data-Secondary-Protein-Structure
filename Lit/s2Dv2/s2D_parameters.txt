@@ -1,0 +1,22 @@
+
+psiblast_database:   /Users/Shared/BlastDB/uniref90filt.fasta	# the path to the psiblast database. EDIT this to put your own!
+
+ncpu:  4	#the number of cpus you wish psiblast to use (see README.txt)
+
+psiblast_files_folder: .	# the path to a folder where the pssm profile files are stored if keep_pssm_profile_files is set to True (otherwise it is used as a temporary files folder for the pssm profiles) EDIT this to put your own!
+
+keep_pssm_profile_files:  False
+
+
+
+# should not edit the following:
+
+networks/net_4000_0.15_11.net
+networks/net_4000_0.15_15.net
+networks/net_1_150_1.00_1.net
+
+DL_network:  networks/net_4000_0.15_5.net
+
+use_psiblast_checkpoint: True
+
+
