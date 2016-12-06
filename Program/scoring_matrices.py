@@ -5,4 +5,7 @@ reverse_amino_dic={3:'A', 2:'C', 5:'D', 'E':6, 'F':-6, 'G':4, 'H':-3, 'I':-9, 'K
 
 
 #simply the secondary structure representation to 3 structures
-sec_struct_dic = {'H':'A', 'G':'A','E':'B', 'B':'B', 'I':'C', 'T':'C', 'S':'C', ' ':'C'}
+sec_struct_dic = {'H':1, 'G':1,'E':-1, 'B':-1, 'I':0, 'T':0, 'S':0, ' ':0}
+
+#simply a list of the amino acids
+ amino_acid_list = ['A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'Y']

@@ -32,7 +32,7 @@ def read_fasta(filename):
             line=line[1:].strip()
             #for now just this need to edit when line gets complex!!
             #TODO
-            if (line not in names):
+            if (line[:4].lower() not in seqids):
                 if len(line)<9:
                     descriptions += ['']
                     names += [line]
