@@ -1,0 +1,13 @@
+'''
+Author: Rachael Kretsch
+Big Data Final Project
+Secondary Protein Structure
+
+get the secondary structure data!
+Uses the dssp database which is a database created
+by Wolfgang Kabsch and Chris Sander to standardize
+the secondary strcuture assignments from the Protein
+data bank. This is all put into a folder and then the
+files can be read.
+'''
+
