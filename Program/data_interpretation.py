@@ -7,17 +7,8 @@ interpret the fasta files
 '''
 
 
-import scoring_matrices as score
+import get_scores
 import pickle
-
-def convert_seq(seq):
-    '''takes in a string sequence and converts to number representation
-    of amino acids according to amino_dic'''
-    seq_list =[]
-    for amino_acid in seq:
-        if amino_acid in score.amino_dic:
-            seq_list += [score.amino_dic[amino_acid]]
-    return seq_list
 
 def read_fasta(filename):
     '''reads in the fasta files and creates the desired data structures'''
@@ -45,7 +36,7 @@ def read_fasta(filename):
                     sequences += [[]] 
         elif line!='' and line!='\n' :
             # if sequence data add to my sequence
-            sequences[-1]+=convert_seq(line.strip())
+            sequences[-1]+=get_scores.convert_seq(line.strip())
     new_file = filename + "_seqs_data.pik"
     with open(new_file, 'wb') as f:
         pickle.dump([sequences,seqids,names,descriptions],f,-1)

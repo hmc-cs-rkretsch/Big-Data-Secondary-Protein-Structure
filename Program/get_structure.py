@@ -36,8 +36,8 @@ def check_struct_files(filename):
     new_file = filename + "_seqs_data.pik"
     with open(new_file, 'rb') as f:
         sequences,seqids,names,descriptions =pickle.load(f)
+    missing = []
     for seqid in seqids:
-        missing = []
         file = "DSSP/"+seqid+".dssp"
         if not os.path.isfile(file):
             missing += [seqid]
@@ -49,34 +49,34 @@ def get_structure(filename):
     with open(new_file, 'rb') as f:
         sequences,seqids,names,descriptions =pickle.load(f)
     structures = []
+    sequences = []
     for seqid in seqids:
         file = "DSSP/"+seqid+".dssp"
         i=0
         structure = []
+        sequence = []
         for line in open(file):
             i+=1
             if i>28:
                 structure += [ score.sec_struct_dic[line[16]] ]
+                sequence += [ line[13] ]
         structures += [structure]
-    struc_file = filename + "_struct_data.pik"
+        sequences += [sequence]
+    struct_file = filename + "_struct_data.pik"
     with open(struct_file, 'wb') as f:
-        pickle.dump(structures,f,-1)
+        pickle.dump([structures,sequences],f,-1)
     return structures
 
 
 def check_structure(filename):
     '''checks that the strucutre data and the sequence data
     match in length. Returns any that do not.'''
-    new_file = filename + "_seqs_data.pik"
-    with open(new_file, 'rb') as f:
-        sequences,seqids,names,descriptions,structures =pickle.load(f)
-    struc_file = filename + "_struct_data.pik"
+    struct_file = filename + "_struct_data.pik"
     with open(struct_file, 'rb') as f:
-        structures = pickle.load(f)
-    i = 0
+        structures, sequences = pickle.load(f)
     incorrect = []
-    for seqid in seqids:
-        print(i)
-        if len(sequences[i])!=len(structures[i]):
+    for seqid in range(len(sequences)):
+        if len(sequences[seqid])!=len(structures[seqid]):
                incorrect += [seqid]
-        i+=1
+               incorrect += [len(sequences[seqid])-len(structures[seqid])]
+    return incorrect
