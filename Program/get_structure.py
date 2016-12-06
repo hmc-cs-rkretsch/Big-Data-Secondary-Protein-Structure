@@ -25,8 +25,12 @@ C: coils, includes turns, bends, pi-helices, and others/not identified
 '''
 
 import scoring_matrices as score
+import pickle
 
-def get_structure(seqids):
+def get_structure(filename):
+    new_file = filename + "_seqs_data.pik"
+    with open(new_file, 'rb') as f:
+        sequences,seqids,names,descriptions =pickle.load(f)
     structures = []
     for seqid in seqids:
         file = "DSSP/"+seqid+".dssp"

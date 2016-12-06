@@ -8,6 +8,7 @@ interpret the fasta files
 
 
 import scoring_matrices as score
+import pickle
 
 def convert_seq(seq):
     '''takes in a string sequence and converts to number representation
@@ -38,6 +39,9 @@ def read_fasta(filename):
         elif line!='' and line!='\n' :
             # if sequence data add to my sequence
             sequences[-1]+=convert_seq(line.strip())
+    new_file = filename + "_seqs_data.pik"
+    with open(new_file, 'wb') as f:
+        pickle.dump([sequences,seqids,names,descriptions],f,-1)
     return sequences,seqids,names,descriptions
 
     
