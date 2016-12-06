@@ -32,10 +32,17 @@ def read_fasta(filename):
             line=line[1:].strip()
             #for now just this need to edit when line gets complex!!
             #TODO
-            descriptions += ['']
-            names += [line]
-            seqids += [line]
-            sequences += [[]]
+            if (line not in names):
+                if len(line)<9:
+                    descriptions += ['']
+                    names += [line]
+                    seqids += [line]
+                    sequences += [[]]
+                else:
+                    descriptions += ['']
+                    names += [line]
+                    seqids += [line[:4].lower()]
+                    sequences += [[]] 
         elif line!='' and line!='\n' :
             # if sequence data add to my sequence
             sequences[-1]+=convert_seq(line.strip())

@@ -1,11 +1,10 @@
 #!/bin/bash
 
 read idseq
+#input the sequence (missing first brackets….
 
-#must have no [] in list!
-#$idseq2=${idseq:1:${#idseq}-1}
-
-for i in $idseq; do
-	echo rsync://rsync.cmbi.ru.nl/ddsp/${i}
-	rsync -avz rsync://rsync.cmbi.ru.nl/ddsp/${i+"dssp"}  DSSP/
+for i in ${idseq}; do
+	title=“rsync://rsync.cmbi.ru.nl/dssp/${i:1:4}*”
+	echo $title
+	rsync -avz ${title:1:35}  DSSP/
 done
