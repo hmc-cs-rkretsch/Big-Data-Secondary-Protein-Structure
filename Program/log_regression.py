@@ -127,12 +127,12 @@ def log_reg(filename, penalty='l2', reg=1.0):
         accuracy_temp = (result_temp==y_temp.flatten()).sum()/len(result_temp)
         accurcacies += [accuracy_temp]
         probs += [prob_full[i:length_sequence+i]]
-        if len(smallest_errors)<10 or accuracy_temp<smallest_errors[0][1] and seqid != '1unj':
+        if (len(smallest_errors)<10 or accuracy_temp<smallest_errors[0][1]) and seqid != '1unj':
             smallest_errors += [[seqid,accuracy_temp,j]]
             smallest_errors = sorted(smallest_errors,key=lambda l:l[1], reverse=True)
             if len(smallest_errors)>10:
                 smallest_errors=smallest_errors[:10]
-        if len(largest_errors)<10 or accuracy_temp>largest_errors[0][1]:
+        if (len(largest_errors)<10 or accuracy_temp>largest_errors[0][1]) and seqid != '1unj':
             largest_errors += [[seqid,accuracy_temp,j]]
             largest_errors = sorted(largest_errors,key=lambda l:l[1])
             if len(largest_errors)>10:
@@ -150,22 +150,24 @@ def log_reg(filename, penalty='l2', reg=1.0):
     print(largest_errors)
     print(smallest_errors)
     
-    graph_protein_prob(probs[3],sequences[3],'1bgp')
-    
-    small =[3,697,333,503,399,651,228,591,268,565]
-    large = [4,609,97,629,523,623,305,181,455,383]
-    
-    print('small')
-    for i in small:
-        print(seqids[i])
-        print(''.join(sequences[i]))
-        
-    print('large')
-    for i in large:
-        print(seqids[i])
-        print(''.join(sequences[i]))
 
-def graph_protein_prob(prob,seq,seqid):
+    print('small')    
+    for res in smallest_errors:
+        num = res[2]
+        print(seqids[num])
+        print(''.join(sequences[num]))
+        graph_protein_prob(probs[num],sequences[num],res[0],res[1])
+
+    print('large')    
+    for res in largest_errors:
+        num = res[2]
+        print(seqids[num])
+        print(''.join(sequences[num]))
+        graph_protein_prob(probs[num],sequences[num],res[0],res[1])
+
+
+
+def graph_protein_prob(prob,seq,seqid,accuracy):
     '''graphs the prob of the three structures against
     the sequence'''
     x = range(len(seq))
@@ -179,7 +181,13 @@ def graph_protein_prob(prob,seq,seqid):
     plt.title('Secondary structure prediction '+seqid)
     plt.xlabel('Amino acid position')
     plt.ylabel('Probability')
-    plt.legend(bbox_to_anchor=(1.05, 1), loc=2)
+    lgd = plt.legend(bbox_to_anchor=(1.05, 1), loc=2)
+    ax=plt.gca()
+    ax.set_xlim([0,len(seq)])
+    accuracy=round(accuracy,4)
+    plt.text(len(seq)+10,0.5,"accuracy = "+str(accuracy))
+    plt.savefig('../Data/'+seqid+'.png',bbox_extra_artists=(lgd,),dpi=600,bbox_inches='tight')
+    plt.close()
         
     
 
