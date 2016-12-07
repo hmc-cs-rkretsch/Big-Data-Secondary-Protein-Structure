@@ -264,9 +264,59 @@ def log_reg(filename, penalty='l2', reg=1.0):
 #==============================================================================
         
     
+def get_real_data(filename):
+    '''essentially just to graph the accurate data of the ones we want'''
+    seqidnums=[3,614,619,571,728,
+     423,616,416,729,727,
+     2,357,395,554,318,
+     107,270,634,671,341]
+    data_file = filename + "_data.pik"
+    with open(data_file, 'rb') as f:
+        data_full = pickle.load(f)
+       
+    struct_file = filename + "_struct_data.pik"
+    with open(struct_file, 'rb') as f:
+        structures, sequences = pickle.load(f)
 
+    y_full = data_full[:,:1]
+
+     
     
-            
+    new_file = filename + "_seqs_data.pik"
+    with open(new_file, 'rb') as f:
+        sequences_2,seqids,names,descriptions = pickle.load(f)
+    for i in seqidnums:
+        seqid = seqids[i]
+        x = range(len(sequences[i]))
+        struct = structures[i]
+        beta = []
+        alpha = []
+        coil = []
+        for amino in range(len(sequences[i])):
+            if struct[amino] == -1:
+                beta += [1]
+                alpha += [0]
+                coil += [0]
+            elif struct[amino] == 1:
+                beta += [0]
+                alpha += [1]
+                coil += [0]
+            else:
+                beta += [0]
+                alpha += [0]
+                coil += [1]
+        plt.scatter(x,beta,label='beta',marker = 'o',color='blue')
+        plt.scatter(x,coil,label='coil',marker='x', color='green')
+        plt.scatter(x,alpha,label='alpha',color='red')
+        plt.title('Secondary structure '+seqid)
+        plt.xlabel('Amino acid position')
+        plt.ylabel('Probability')
+        lgd = plt.legend(bbox_to_anchor=(1.05, 1), loc=2)
+        ax=plt.gca()
+        ax.set_xlim([0,len(sequences[i])])
+        ax.set_ylim([0.9,1.1])
+        plt.savefig('../Data/'+seqid+'_actual.png',bbox_extra_artists=(lgd,),dpi=600,bbox_inches='tight')
+        plt.close()
         
 
     
