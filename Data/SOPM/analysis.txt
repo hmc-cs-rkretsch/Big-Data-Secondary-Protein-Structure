@@ -1,0 +1,2 @@
+#Analysis of the SOPM data for the 20 amino acids
+
