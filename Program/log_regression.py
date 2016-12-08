@@ -313,6 +313,8 @@ def get_real_data(filename):
         plt.ylabel('Probability')
         lgd = plt.legend(bbox_to_anchor=(1.05, 1), loc=2)
         ax=plt.gca()
+        fig = plt.gcf()
+        fig.set_size_inches
         ax.set_xlim([0,len(sequences[i])])
         ax.set_ylim([0.9,1.1])
         plt.savefig('../Data/'+seqid+'_actual.png',bbox_extra_artists=(lgd,),dpi=600,bbox_inches='tight')
