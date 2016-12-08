@@ -61,9 +61,7 @@ This project aims to look at methods to predict secondary protein structure. Pro
 
 \section{Results}
 
-\subsection{Footnotes}
-
-\subsection{Figures}
+\subsection{Logistic regression}
 
 \begin{figure}[h]
   \centering
@@ -71,33 +69,22 @@ This project aims to look at methods to predict secondary protein structure. Pro
   \caption{Sample figure caption.}
 \end{figure}
 
+\begin{figure}[h]
+  \centering
+  \fbox{\includegraphics[width=\textwidth]{reg_values}}
+  \caption{Sample figure caption.}
+\end{figure}
 
-\subsection{Tables}
 
-All tables must be centered, neat, clean and legible.  The table
-number and title always appear before the table.  See
-Table~\ref{sample-table}.
 
-Place one line space before the table title, one line space after the
-table title, and one line space after the table. The table title must
-be lower case (except for first word and proper nouns); tables are
-numbered consecutively.
+\subsection{Method comparison}
 
-Note that publication-quality tables \emph{do not contain vertical
-  rules.} We strongly suggest the use of the \verb+booktabs+ package,
-which allows for typesetting high-quality, professional tables:
-\begin{center}
-  \url{https://www.ctan.org/pkg/booktabs}
-\end{center}
-This package was used to typeset Table~\ref{sample-table}.
 
 \begin{table}[t]
-  \caption{Sample table title}
-  \label{sample-table}
+  \caption{Accuracy of various secondary structure prediction methods}
   \centering
   \begin{tabular}{lll}
     \toprule
-
     Method     & Accuracy on data set (\%)    & Reported accuracy (\%)\\
     \midrule
     Logistic regression & 54 & -     \\
@@ -108,13 +95,45 @@ This package was used to typeset Table~\ref{sample-table}.
   \end{tabular}
 \end{table}
 
+\begin{table}[t]
+  \caption{Accuracy of methods for specific proteins}
+  \centering
+  \begin{tabular}{lllll}
+    \toprule
+    \multicolumn{5}{c}{Accuracies (\%)}\\
+    \cmidrule{2-5}
+    Protein ID & Logistic regression & GORIV & SOPM & s2D\\
+    \midrule
+    1bgp & 25 & 64&62&64 \\
+    4q7t & 25 & 44 & 42 & 67 \\
+    4qgw & 25 & 69 & 61 & 83 \\
+    5h88 & 26 & 37&37&57 \\
+    4l1s & 26 & 64&52&70 \\
+    
+    5h89 & 27 & 37&39&60 \\
+    3s0f & 27 & 49 & 58 & 70 \\
+    4q9w & 27 & 51&55&70 \\
+    3rwt & 27 & 37&35&48 \\
+    5hzo & 28 & 37 & 46 & 64 \\
+    \midrule
+    1bfp & 60 & 48&60&77 \\
+    3ekh & 60 & 54&61&55 \\
+    3ned & 60 & 40&46&73 \\
+    4k3g & 60 & 49&54&59 \\
+    3cfc & 60 & 58 &60&61 \\
+    
+    1xkh & 60 & 50&48&47 \\
+    2wht & 60 & 37&58&70 \\
+    4w6b & 60 & 44&54&69 \\
+    4xvp & 60 & 44&49&52 \\
+    3dqh & 60 & 42&56&73 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
 \section{Discussion}
 
-Do not change any aspects of the formatting parameters in the style
-files.  In particular, do not modify the width or length of the
-rectangle the text should fit into, and do not change font sizes
-(except perhaps in the \textbf{References} section; see below). Please
-note that pages should be numbered.
+An interesting future problem could be to implement a machine learning algorithm to address post-transcriptional modifications. 
 
 
 \subsubsection*{Availability}

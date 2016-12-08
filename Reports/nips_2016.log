@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.11)  8 DEC 2016 09:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.11)  8 DEC 2016 10:49
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -785,33 +785,46 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-<1bgp.png, id=69, 525.6438pt x 309.19514pt>
+<1bgp.png, id=65, 525.6438pt x 309.19514pt>
 File: 1bgp.png Graphic file (type png)
  <use 1bgp.png>
-Package pdftex.def Info: 1bgp.png used on input line 70.
+Package pdftex.def Info: 1bgp.png used on input line 68.
 (pdftex.def)             Requested size: 397.48499pt x 233.81598pt.
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 70--71
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 68--69
  [][] 
  []
 
-[2 <./1bgp.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 154.
- [3]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 154.
+<reg_values.png, id=67, 394.47375pt x 282.05376pt>
+File: reg_values.png Graphic file (type png)
+ <use reg_values.png>
+Package pdftex.def Info: reg_values.png used on input line 74.
+(pdftex.def)             Requested size: 397.48499pt x 284.20924pt.
+
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 74--75
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[2 <./1bgp.png>] [3 <./reg_values.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 173.
+ [4]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 173.
  (./nips_2016.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 154.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 154.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 173.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 173.
 Package rerunfilecheck Info: File `nips_2016.out' has not changed.
-(rerunfilecheck)             Checksum: 1A47B12093C284051712EAB6B1552E54;892.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 154.
+(rerunfilecheck)             Checksum: E8EE110E597031802951D7D2B3A1CA3C;856.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 173.
  ) 
 Here is how much of TeX's memory you used:
- 8422 strings out of 493013
- 126505 string characters out of 6133343
- 245780 words of memory out of 5000000
+ 8404 strings out of 493013
+ 126345 string characters out of 6133343
+ 248780 words of memory out of 5000000
  11741 multiletter control sequences out of 15000+600000
- 38223 words of font info for 101 fonts, out of 8000000 for 9000
+ 34310 words of font info for 87 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  31i,8n,38p,1129b,397s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/t
@@ -821,10 +834,10 @@ ve/2016/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2016
 /texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2016/texmf-dis
 t/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2016/texmf-dist/fonts/ty
 pe1/urw/times/utmri8a.pfb>
-Output written on nips_2016.pdf (3 pages, 456007 bytes).
+Output written on nips_2016.pdf (4 pages, 469155 bytes).
 PDF statistics:
- 119 PDF objects out of 1000 (max. 8388607)
- 105 compressed objects within 2 object streams
- 23 named destinations out of 1000 (max. 500000)
- 23670 words of extra memory for PDF output out of 24883 (max. 10000000)
+ 121 PDF objects out of 1000 (max. 8388607)
+ 104 compressed objects within 2 object streams
+ 25 named destinations out of 1000 (max. 500000)
+ 19571 words of extra memory for PDF output out of 20736 (max. 10000000)
 
