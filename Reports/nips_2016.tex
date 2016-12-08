@@ -21,94 +21,29 @@
 \usepackage{nicefrac}       % compact symbols for 1/2, etc.
 \usepackage{microtype}      % microtypography
 
-\title{Formatting instructions for NIPS 2016}
-
-% The \author macro works with any number of authors. There are two
-% commands used to separate the names and addresses of multiple
-% authors: \And and \AND.
-%
-% Using \And between authors leaves it to LaTeX to determine where to
-% break the lines. Using \AND forces a line break at that point. So,
-% if LaTeX puts 3 of 4 authors names on the first line, and the last
-% on the second line, try using \AND instead of \And before the third
-% author name.
-
-\author{
-  David S.~Hippocampus\thanks{Use footnote for providing further
-    information about author (webpage, alternative
-    address)---\emph{not} for acknowledging funding agencies.} \\
-  Department of Computer Science\\
-  Cranberry-Lemon University\\
-  Pittsburgh, PA 15213 \\
-  \texttt{hippo@cs.cranberry-lemon.edu} \\
-  %% examples of more authors
-  %% \And
-  %% Coauthor \\
-  %% Affiliation \\
-  %% Address \\
-  %% \texttt{email} \\
-  %% \AND
-  %% Coauthor \\
-  %% Affiliation \\
-  %% Address \\
-  %% \texttt{email} \\
-  %% \And
-  %% Coauthor \\
-  %% Affiliation \\
-  %% Address \\
-  %% \texttt{email} \\
-  %% \And
-  %% Coauthor \\
-  %% Affiliation \\
-  %% Address \\
-  %% \texttt{email} \\
-}
+\title{Accuracy of secondary protein structure prediction tools for chromoproteins and fluorescent proteins}
 
 \begin{document}
 % \nipsfinalcopy is no longer used
 
+ Rachael C.~Kretsch \\
+ Mathematics of Big Data, Fall 2016\\
+ Harvey Mudd College\\
+ \texttt{rkretsch@g.hmc.edu} \\
+
 \maketitle
 
 \begin{abstract}
-  The abstract paragraph should be indented \nicefrac{1}{2}~inch
-  (3~picas) on both the left- and right-hand margins. Use 10~point
-  type, with a vertical spacing (leading) of 11~points.  The word
-  \textbf{Abstract} must be centered, bold, and in point size 12. Two
-  line spaces precede the abstract. The abstract must be limited to
-  one paragraph.
+   abstract...
 \end{abstract}
 
-\section{Submission of papers to NIPS 2016}
+\section{Introduction}
 
-\textbf{There is a new style file for papers submitted in 2016!}
+\subsection{Secondary protein structure prediction}
 
-NIPS requires electronic submissions.  The electronic submission site
-is
-\begin{center}
-  \url{https://cmt.research.microsoft.com/NIPS2016/}
-\end{center}
+This project aims to look at methods to predict secondary protein structure. Protein structure prediction is a major field of study and is a problem that takes massive computational power to solve. There are two main approaches looking from a biochemical point of view. The first is isolated the protein, crystallizing it, and performing crystal chromatography to figure out the structure. This structure is relaxed into its hypothesized structure via molecular dynamics. I have previously done work on molecular dynamic methods, but now I would like to look at it from the other direction. One of the most plentiful and easy to obtain biological data is DNA sequence. From the DNA sequence of a coding region there are simply rules to propose a great starting point for the protein's amino acid sequence. The problem of predicting the 3D structure from an amino acid sequence is extremely hard. I will reduce this problem to simpler features. My aim is to look at how we can use the amino acid sequence, the primary structure, to deduce secondary structure components like beta sheets, alpha helices, and coils. 
 
-Please read carefully the instructions below and follow them
-faithfully.
-
-\subsection{Style}
-
-Papers to be submitted to NIPS 2016 must be prepared according to the
-instructions presented here. Papers may only be up to eight pages
-long, including figures. Since 2009 an additional ninth page
-\emph{containing only acknowledgments and/or cited references} is
-allowed. Papers that exceed nine pages will not be reviewed, or in any
-other way considered for presentation at the conference.
-
-The margins in 2016 are the same as since 2007, which allow for
-$\sim$$15\%$ more words in the paper compared to earlier years.
-
-Authors are required to use the NIPS \LaTeX{} style files obtainable
-at the NIPS website as indicated below. Please make sure you use the
-current files and not previous versions. Tweaking the style files may
-be grounds for rejection.
-
-\subsection{Retrieval of style files}
+\subsection{Fluorescent proteins and chromoproteins}
 
 The style files for NIPS and other conference information are
 available on the World Wide Web at
@@ -379,28 +314,26 @@ acknowledgments in the anonymized submission, only in the final paper.
 
 \section*{References}
 
-References follow the acknowledgments. Use unnumbered first-level
-heading for the references. Any choice of citation style is acceptable
-as long as you are consistent. It is permissible to reduce the font
-size to \verb+small+ (9 point) when listing the references. {\bf
-  Remember that you can use a ninth page as long as it contains
-  \emph{only} cited references.}
-\medskip
-
 \small
 
-[1] Alexander, J.A.\ \& Mozer, M.C.\ (1995) Template-based algorithms
-for connectionist rule extraction. In G.\ Tesauro, D.S.\ Touretzky and
-T.K.\ Leen (eds.), {\it Advances in Neural Information Processing
-  Systems 7}, pp.\ 609--616. Cambridge, MA: MIT Press.
+[1] Touw, W.G.\ \& Baakman, C.\ \& Black, B. \ \& te Beek, T.AH.\ \& Kreiger, E.\ \& Joosten, R.P.\ \&
+Vriend, G.\ (2015) A series of PBD related databases for everyday needs.
+for connectionist rule extraction.  {\it Nucleic Acids Research}, 43(Database issue): D364-D368.
 
-[2] Bower, J.M.\ \& Beeman, D.\ (1995) {\it The Book of GENESIS:
-  Exploring Realistic Neural Models with the GEneral NEural SImulation
-  System.}  New York: TELOS/Springer--Verlag.
+[2] Kabsch W.\ \& Sander C.\ (1983) Dictionary of protein secondary structure: pattern recognition of hydrogen-bonded and geometrical features {\it Biopolymers}, 983 22 2577-2637. PMID: 6667333; UI: 84128824.
 
-[3] Hasselmo, M.E., Schnell, E.\ \& Barkai, E.\ (1995) Dynamics of
-learning and recall at excitatory recurrent synapses and cholinergic
-modulation in rat hippocampal region CA3. {\it Journal of
-  Neuroscience} {\bf 15}(7):5249-5262.
+[3] Cambria, A.\ (2009) Hidropathy Clustering Assisted Methods. http://www.acbrc.org/hcam.html
+
+[4] Garnier, J.\ \& Gibrat, J.F.\ \& Robson, B.\ (1996) GOR Method for Predicting Protein Secondary Structure from Amino Acid Sequence. {\it Method in Enzymology}. 266:540-53.
+
+[5] Geourjon C.\ \& Deleage G.\ (1994) SOPM: a self-optimimization mehtod for protein secondary structure prediction. {\it Protein Engineering.} 7(2):157-64.
+
+[6] Karypis, G.\ (2006) YASSPP: Better Kernels and Coding Schemes Lead to Improvements in Protein Secondary Structure Prediction. {\it Proteins.} 64:575-86.
+
+[7] Singh, M.\ (2001) Predicting Protein Secondary and Supersecondary Structure. Princeton University. CRC Press.
+
+[8] Sormanni, P.\ \& Camilloni, C.\ \& Fariselli, P.\ \& Vendruscolo, M.\ (2015) The s2D Method: Simultaneous Sequence-Based Prediction of the Statistical Populations of Ordered and Disordered Regions in Proteins. {\it J. Mol. Biol.} 427: 982-96.
+
+[9] Sen, T.Z.\ \& Jernigan, R.L.\ \& Garnier, J.\ \& Kloczkowski, A.\ (2005) GOR V server for protein secondary structure prediction. {\it Bioinformatics} Jun 1; 21(11): 2787?2788.
 
 \end{document}
