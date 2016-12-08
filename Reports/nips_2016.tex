@@ -43,39 +43,89 @@
 
 \subsection{Secondary protein structure prediction}
 
-This project aims to look at methods to predict secondary protein structure. Protein structure prediction is a major field of study and is a problem that takes massive computational power to solve. There are two main approaches looking from a biochemical point of view. The first is isolated the protein, crystallizing it, and performing crystal chromatography to figure out the structure. This structure is relaxed into its hypothesized structure via molecular dynamics. I have previously done work on molecular dynamic methods, but now I would like to look at it from the other direction. One of the most plentiful and easy to obtain biological data is DNA sequence. From the DNA sequence of a coding region there are simply rules to propose a great starting point for the protein's amino acid sequence. The problem of predicting the 3D structure from an amino acid sequence is extremely hard. I will reduce this problem to simpler features. My aim is to look at how we can use the amino acid sequence, the primary structure, to deduce secondary structure components like beta sheets, alpha helices, and coils. 
+This project aims to look at methods to predict secondary protein structure. Protein structure prediction is a major field of study and is a problem that takes massive computational power to solve. There are two main approaches looking from a biochemical point of view. The first is isolated the protein, crystallizing it, and performing crystal chromatography to figure out the structure. This structure is relaxed into its hypothesized structure via molecular dynamics. The second method is experimentally less intense. One of the most plentiful and easy to obtain biological data is DNA sequence. From the DNA sequence of a coding region there are simply rules to propose a great starting point for the protein's amino acid sequence. The problem of predicting the 3D structure from an amino acid sequence is extremely hard. I will reduce this problem to simpler features. My aim is to look at how we can use the amino acid sequence, the primary structure, to deduce secondary structure components like $\beta$-sheets, $\alpha$-helices, and coils. 
+
+The field of computationally predicting secondary structures has been active since the 1970s [7]. The large majority of these methods are extremely generalizable to proteins of all classes. The training databases used for these methods are often very diverse with a goal of less than 25(\%) homology between each protein [8]. This projects inspiration drew from a method created by Cambria, called Hydropathy Clustering Assisted Methods [3]. This method is specifically designed to give accurate prediction for water soluble globular proteins, which are often difficult to predict using the conventional generalizable methods because of their special hydrophobicity concerns. This project concerns itself with a group of proteins, chromoproteins and florescent proteins, whose secondary structure is predicted with below average accuracy using traditional methods, however, their secondary structure is an excellent indicator for identifying important parts of the protein for manipulation.
 
 \subsection{Fluorescent proteins and chromoproteins}
+Chromoproteins and fluorescent proteins are vital for biological and medical research. Chromoproteins are colored proteins and fluorescent proteins fluoresce light when the absorb a certain wavelength. They are used to target and visualize components of interest. As biological research progresses, proteins with more extreme properties such as new colors, and fluorescence able to pass through thick skin are needed. Finding these in nature is very difficult so the best method is to mutate current proteins and increase their functionality. The structure of these chromoproteins and fluorescent proteins is very important and quick conserved between proteins. The structures are mostly $\beta$-strands that wrap into $\beta$-barrels. Inside these barrels are coils that have been shown to be vital for the fluorescent properties of these proteins. Mutations to these coils cause dramatic changes in function from increasing function to changing wavelength. Obtaining structural data from experiment, either NMR or x-ray crystallography, can be very difficult and time consuming. On the other hand sequencing DNA is very simple, quick, and cheap. In fact the cost of sequencing is decreasing quicker than Moore?s law! Therefore, are computational method to convert sequence to structure would help experimentalists target areas for mutation. Because chromoproteins and fluorescent proteins have relatively predictable structural elements and these are almost wholly defined by secondary structure. This makes this data set an excellent candidate for secondary protein structure predictions.
+
+
 \section{Methods and materials}
 
 \subsection{Logistic regression method implementation}
 
+The protein sequences were extracted from the Protein Data Base [10] from results of the searches "chromoprotein" and "florescent". Proteins less than 25 amino acids in length were removed as well as any sequences with the same ID, the first sequence was kept. The left a dataset of 739 with a total of 392,106 amino acids. The correct secondary structure to which each amino acid in these sequences belong was extracted from DSSP [1],[2], a standardized database for interpretations of NMR and crystallography results. Scoring matrices were created by analyzing the frequency that each amino acid was part of each structure. $\alpha$-helices and 3-helices were identified as helical structures and were given a weight of 1. $\beta$-strands and $\beta$-bridges were identified as $\beta$ structures and were given a weight of -1. The remaining structures, 5-helices, turns, and bends were identified as coil structures and given a weight of 0. Essentially this model assumes that a amino acid is either in a correct environment to form a helical structure or a $\beta$ structure and if the preference for either is not strong enough, then is coils. The averaged score of an amino acid, was simply calculated by looking at all instances in the data set and averaging the described weights. This was also done for the neighboring amino acids up to 3 amino acids away. 3 was selected, because an helix can only form with 6 amino acids so we needed to be analyzing interactions at least 3 away to predict and helix. Matrices were created for each amino acid with the scores of itself and that neighbor scores for the surrounding 6 amino acids. This create a data set of 2,744,742 data points. A quarter of the data was randomly selected as a validation set. A multinomial logistic regression was performed on the remaining 75(\%) of the data. L2 regression was shown to be the most precise with a regularization factor of 3.4. Accuracy was calculated according the the convention of secondary structure prediction methods, Q3.
+
+$$Q3=\sum_{n=1}^{k} NC(i)/NO(i) $$
+
+where NC(i) is the number of correct amino acid predictions for protein i, and NO is the number of observed amino acids for protein i.
+
 \subsection{Literature method testing}
 
-\subsubsection{GORIV}
+\subsubsection{GORIV [4]}
 
-\subsubsection{SOPM}
+GORIV is a secondary protein structure prediction method based in information theory and bayesian statistics. It uses the basis that given a data set os sufficient size we can find the probability of an amino acid of some type being a certain secondary structure. This can be extended to joint distributions involving the amino acids next door. The result in an expression for the probability of the confirmation S at a position i given the surrounding amino acid identities $R_n$
 
-\subsubsection{s2D}
+$$I(\delta S_i ; R_1, ... , R_n) = log[\frac{P(S_i,R_1,...,R_n)}{P(n-S_i,R_1,...,R_n)}] + log[\frac{P(n-S)}{P(S)}]$$
+
+Approximations:
+
+The method has a training data base of 267 proteins. The newest update, GORV, included evolutionary data to increase accuracy [9].
+
+The sequences prediction data was calculated from \url{https://npsa-prabi.ibcp.fr/cgi-bin/npsa_automat.pl?page=/NPSA/npsa_gor4.html}.
+
+\subsubsection{SOPM [5]}
+
+The first step for the SOPM method is to generate a limited database. This is done by using an alignment algorithm by Needleman and Wunsch (1970) [11] to pairwise compare the input protein to the proteins in the reference database. Because, this alignment method, as with most alignment methods, is parameterized with the idea that sequences compared will be quite similar we must be very careful because we are comparing proteins that are sometimes vastly different, especially in length. The parameter that is most volatile is the gap penalty, the parameter that penalizes a large insertion not present in the other sequences. To reduce this, 5 randomized copies of each protein of the reference database were created. The averaged randomized score was taken as the noise, and the actual protein sequence similarity could then be separated from this noise. The database is selected from the group of proteins most similar to the input protein. However, only one of each highly related protein is added so as not to skew the prediction parameters by a large group of very similar structures and sequences. 
+
+The second and third step consist of a continuous loop until prediction accuracy is sufficient. Firstly, we loop through all the protein in the sub-database and individually predict their secondary structure using the data from the other proteins in the sub database. This is accomplished by breaking the protein into 17 overlapping amino acid sequences which are then compared. The scores are accumulated as each protein is compared. There are adjustment parameters for each of these scores representing the adjustment for $\alpha$-helix, $\beta$-sheet, and coils. These are optimized every step by the following equation
+
+$$f_k(i+1) = f(i) + \frac{NO(i)-NP_k(i))}{NP_k(i)}$$
+
+where NO(i) is the total amount of amino acids observed and $NP_k$ is the amount of amino acids predicted as k structured. When the fit is satisfactory it uses the fit to predict the input protein. The method has a training database of 239 proteins.
+
+The sequences prediction data was calculated from \url{https://npsa-prabi.ibcp.fr/cgi-bin/npsa_automat.pl?page=npsa_sopm.html}. The sequence was predicted for the 3 structures, with a similarity threshold value of 8 and a window length of 17.
+
+\subsubsection{s2D [8]}
+
+This is the newest method tested and therefore predictably has the largest training set of 2671 proteins.
+
+The sequences prediction data was calculated from \url{http://www-mvsoftware.ch.cam.ac.uk/index.php/s2D}.
+
+\subsection{Comparing methods}
+The four methods were compared for the 20 amino acids that the logistic regression performed best and worst on. The accuracies were compared for each of these proteins. The identity, function, and structure was also manually analyzed to investigate if there were any patterns that caused a method to fail.
 
 
 \section{Results}
 
 \subsection{Logistic regression}
 
-\begin{figure}[h]
-  \centering
-  \fbox{\includegraphics[width=\textwidth]{1bgp.png}}
-  \caption{Sample figure caption.}
-\end{figure}
+The logistic regression parameters were chosen to be L2 regression and a regression parameter of 3.4 as seen in Figure 1. the coefficients of the fit are seen in Figure 2. The selection of the training set was shown to not have a significant effect on the accuracy (Figure 3). The accuracy of individual protein selection was skewed towards high accuracies and centered around 54(\%) (Figure 4).
 
 \begin{figure}[h]
   \centering
   \fbox{\includegraphics[width=\textwidth]{reg_values}}
-  \caption{Sample figure caption.}
+  \caption{Selecting the logistic regression parameters.}
 \end{figure}
 
+\begin{figure}[h]
+  \centering
+  \fbox{\includegraphics[width=\textwidth]{re_coef}}
+  \caption{Logistic regression fit coefficients.}
+\end{figure}
 
+\begin{figure}[h]
+  \centering
+  \fbox{\includegraphics[width=\textwidth]{range}}
+  \caption{Accuracy dependence on training set sampling. }
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \fbox{\includegraphics[width=\textwidth]{accuracies}}
+  \caption{Range of accuracies in the data set. }
+\end{figure}
 
 \subsection{Method comparison}
 
@@ -131,9 +181,27 @@ This project aims to look at methods to predict secondary protein structure. Pro
   \end{tabular}
 \end{table}
 
+\begin{figure}[h]
+  \centering
+  \fbox{\includegraphics[width=\textwidth]{3ned}}
+  \caption{Method comparison for 3ned. }
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \fbox{\includegraphics[width=\textwidth]{4l1s}}
+  \caption{Method comparison for 4l1s. }
+\end{figure}
+
 \section{Discussion}
 
-An interesting future problem could be to implement a machine learning algorithm to address post-transcriptional modifications. 
+The method develop could be used on a chromoproteins or florescent protein whose structure is unknown. Let's say a new protein is discovered that has far-red florescence and we want to try and increase this function. We could use this method to predict were the coil structures are and pinpoint these parts of the sequence for mutations. This targeted approach would be a vast improvement over random mutations.
+
+The accuracy measurement could be adjusted to give a more precise picture. Each method gives the probability that the given amino acid is each secondary structure. So these confidence intervals could be used to improve the accuracy measurements.
+
+More generalized methods need to be investigated to conclude that chromoproteins and florescent protein secondary structure is not accurately predicted by these and warrants another method. One such method is YASSP, which focuses on choosing optimal kernels in a cascaded model constructed from two SVM-based models [6].
+
+An interesting future problem could be to implement a machine learning algorithm to address post-transcriptional modifications. Essentially, the DNA sequence does not map perfectly to the 
 
 
 \subsubsection*{Availability}
@@ -169,5 +237,7 @@ for connectionist rule extraction.  {\it Nucleic Acids Research}, 43(Database is
 [9] Sen, T.Z.\ \& Jernigan, R.L.\ \& Garnier, J.\ \& Kloczkowski, A.\ (2005) GOR V server for protein secondary structure prediction. {\it Bioinformatics} Jun 1; 21(11): 2787?2788.
 
 [10] RCSB Protein Data Bank. An Information Portal to 124928 Biological Structures. 739 proteins used, please see additional resources for these proteins and acknowledgments to all the scientists to whom these 739 proteins structures are acknowledged.
+
+[11] Needleman, S.B.\ \& Wunsch, C.\ (1970) {\it J. Mol. Biol.} 48, 443-453.
 
 \end{document}

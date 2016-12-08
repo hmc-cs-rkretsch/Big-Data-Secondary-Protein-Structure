@@ -4,10 +4,11 @@
 \BOOKMARK [1][-]{section.2}{Methods and materials}{}% 4
 \BOOKMARK [2][-]{subsection.2.1}{Logistic regression method implementation}{section.2}% 5
 \BOOKMARK [2][-]{subsection.2.2}{Literature method testing}{section.2}% 6
-\BOOKMARK [3][-]{subsubsection.2.2.1}{GORIV}{subsection.2.2}% 7
-\BOOKMARK [3][-]{subsubsection.2.2.2}{SOPM}{subsection.2.2}% 8
-\BOOKMARK [3][-]{subsubsection.2.2.3}{s2D}{subsection.2.2}% 9
-\BOOKMARK [1][-]{section.3}{Results}{}% 10
-\BOOKMARK [2][-]{subsection.3.1}{Logistic regression}{section.3}% 11
-\BOOKMARK [2][-]{subsection.3.2}{Method comparison}{section.3}% 12
-\BOOKMARK [1][-]{section.4}{Discussion}{}% 13
+\BOOKMARK [3][-]{subsubsection.2.2.1}{GORIV [4]}{subsection.2.2}% 7
+\BOOKMARK [3][-]{subsubsection.2.2.2}{SOPM [5]}{subsection.2.2}% 8
+\BOOKMARK [3][-]{subsubsection.2.2.3}{s2D [8]}{subsection.2.2}% 9
+\BOOKMARK [2][-]{subsection.2.3}{Comparing methods}{section.2}% 10
+\BOOKMARK [1][-]{section.3}{Results}{}% 11
+\BOOKMARK [2][-]{subsection.3.1}{Logistic regression}{section.3}% 12
+\BOOKMARK [2][-]{subsection.3.2}{Method comparison}{section.3}% 13
+\BOOKMARK [1][-]{section.4}{Discussion}{}% 14
